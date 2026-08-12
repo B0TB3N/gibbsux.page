@@ -5,50 +5,64 @@ import { SERVER } from '../consts.ts';
   <div class="status-top">
     <span class="dot" id="sdot"></span>
     <span class="status-txt" id="stxt">CHECKING…</span>
+    <span class="small muted" id="stime" style="margin-left:auto"></span>
   </div>
   <div class="status-stats">
     <div class="stat"><div class="k">PLAYERS</div><div class="v" id="sply">—</div></div>
     <div class="stat"><div class="k">VERSION</div><div class="v" id="sver" style="font-size:17px">—</div></div>
+    <div class="stat"><div class="k">MOTD</div><div class="v" id="smotd" style="font-size:15px;font-weight:500">—</div></div>
   </div>
   <div class="plist" id="splist"></div>
 </div>
 <script>
-  (async () => {
+  (function () {
     const box  = document.querySelector('.status-card');
+    if (!box) return;
     const dot  = document.getElementById('sdot');
     const txt  = document.getElementById('stxt');
     const ply  = document.getElementById('sply');
     const ver  = document.getElementById('sver');
+    const motd = document.getElementById('smotd');
+    const time = document.getElementById('stime');
     const list = document.getElementById('splist');
-    if (!box) return;
+    const esc  = (s) => String(s).replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
 
-    try {
-      const r = await fetch('https://api.mcsrvstat.us/3/' + box.dataset.addr);
-      const d = await r.json();
+    async function check() {
+      try {
+        const r = await fetch('https://api.mcstatus.io/v2/status/java/' + box.dataset.addr, { cache: 'no-store' });
+        const d = await r.json();
 
-      if (d.online) {
-        dot.className = 'dot on';
-        txt.textContent = 'ONLINE';
-        txt.style.color = 'var(--green)';
-        ply.textContent = (d.players?.online ?? 0) + ' / ' + (d.players?.max ?? '?');
-        ver.textContent = d.version || '—';
-        const names = d.players?.list?.map(p => p.name) || [];
-        list.innerHTML = names.length
-          ? names.map(n => '<span class="pchip">' + n + '</span>').join('')
-          : '<span class="small muted">Nobody online right now.</span>';
-      } else {
-        dot.className = 'dot off';
-        txt.textContent = 'OFFLINE';
+        if (d.online) {
+          dot.className   = 'dot on';
+          txt.textContent = 'ONLINE';
+          txt.style.color = 'var(--online)';
+          ply.textContent = (d.players?.online ?? 0) + ' / ' + (d.players?.max ?? '?');
+          ver.textContent = d.version?.name_clean || '—';
+          motd.textContent = d.motd?.clean || '—';
+
+          const names = (d.players?.list || []).map(p => p.name_clean || p.name).filter(Boolean);
+          list.innerHTML = names.length
+            ? names.map(n => '<span class="pchip">' + esc(n) + '</span>').join('')
+            : '<span class="small muted">Nobody online right now — be the first.</span>';
+        } else {
+          dot.className   = 'dot off';
+          txt.textContent = 'OFFLINE';
+          txt.style.color = 'var(--dim)';
+          ply.textContent = '—';
+          ver.textContent = '—';
+          motd.textContent = '—';
+          list.innerHTML = '<span class="small muted">Not reachable right now. It may be restarting.</span>';
+        }
+        time.textContent = 'updated ' + new Date().toLocaleTimeString();
+      } catch (e) {
+        dot.className   = 'dot off';
+        txt.textContent = 'UNKNOWN';
         txt.style.color = 'var(--dim)';
-        ply.textContent = '—';
-        ver.textContent = '—';
-        list.innerHTML = '<span class="small muted">Server is not reachable. It may be restarting.</span>';
+        list.innerHTML  = '<span class="small muted">Could not reach the status service.</span>';
       }
-    } catch (e) {
-      dot.className = 'dot off';
-      txt.textContent = 'UNKNOWN';
-      ply.textContent = '—';
-      list.innerHTML = '<span class="small muted">Could not reach the status service.</span>';
     }
+
+    check();
+    setInterval(check, 60000);
   })();
 </script>

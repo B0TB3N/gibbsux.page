@@ -1,5 +1,5 @@
 export const SERVER = {
-  name: "GibbSux",
+  name: 'GibbSux',
   address: 'jacobs-analogy.tun.ply.gg',
   discord: 'https://discord.com/users/801135252206125096',
   mcVersion: '1.21.8',
@@ -8,4 +8,13 @@ export const SERVER = {
   gamemode: 'Survival',
   viewDistance: '10 chunks',
   maxPlayers: 20,
+};
+
+export const PACK = {
+  name: 'GibbSux',
+  version: '1.0.0',
+  file: '/GibbSux-1.0.0.mrpack',
+  size: '2.4 MB',
+  modCount: 79,
+  dhVersion: '3.2.0-b',
 };

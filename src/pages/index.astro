@@ -16,12 +16,14 @@ import { SERVER } from '../consts.ts';
       <span class="chip">🌍 <b>Unlimited world</b></span>
       <span class="chip">🔒 <b>Whitelist only</b></span>
       <span class="chip">💾 <b>Nightly backups</b></span>
+      <span class="chip">🌄 <b>Distant Horizons</b></span>
     </div>
 
     <AddressBox />
 
     <div class="btn-row">
-      <a href="/join" class="btn btn-p">How to Join →</a>
+      <a href="/mods#modpack" class="btn btn-p">Get the Modpack →</a>
+      <a href="/join" class="btn btn-g">How to Join</a>
       <a href={SERVER.discord} class="btn btn-dc" target="_blank" rel="noopener">Ask for Access</a>
     </div>
   </div>
@@ -63,9 +65,10 @@ import { SERVER } from '../consts.ts';
         <p>Automatic backups every night, stored off-site. Your builds survive accidents.</p>
       </div>
       <div class="card">
-        <span class="ico">🎨</span>
-        <h3>Your mods, your choice</h3>
-        <p>Shaders, minimaps, zoom, FPS mods — install whatever you want client-side.</p>
+        <span class="ico">🌄</span>
+        <h3>See for miles</h3>
+        <p>The world is pregenerated and served with Distant Horizons LOD data —
+        distant terrain is there the moment you join, without walking it first.</p>
       </div>
       <div class="card">
         <span class="ico">🍓</span>
@@ -91,8 +94,8 @@ import { SERVER } from '../consts.ts';
       <div class="step">
         <div class="step-n">2</div>
         <div class="step-b">
-          <h3>Install Fabric {SERVER.mcVersion}</h3>
-          <p>Use the Modrinth App or Prism Launcher — takes about two minutes.</p>
+          <h3>Install the modpack</h3>
+          <p>One download, {' '}<a href="/mods#modpack">everything set up</a> — including Distant Horizons.</p>
         </div>
       </div>
       <div class="step">

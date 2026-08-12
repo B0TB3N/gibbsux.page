@@ -1,6 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SERVER } from '../consts.ts';
+import { SERVER, PACK } from '../consts.ts';
+
+const packHighlights = [
+  { i:'🌄', n:'Distant Horizons ' + PACK.dhVersion, d:'Matches the server exactly. This is what lets you see the pregenerated world at distance.' },
+  { i:'⚡', n:'Sodium + Iris',        d:'Rendering rewrite plus shader support. Large FPS gain over vanilla.' },
+  { i:'🎨', n:'3 shader packs',       d:'Complementary Unbound, BSL and Solas, ready to switch between.' },
+  { i:'🗺', n:"Xaero's Minimap & Map", d:'Minimap with waypoints and a full world map.' },
+  { i:'🔎', n:'Jade + REI + AppleSkin', d:'Block info, recipe lookup and food values.' },
+  { i:'🧊', n:'Lithium + FerriteCore', d:'The same optimisation stack the server runs, on your side.' },
+  { i:'📸', n:'Zoomify, Freecam, Fabrishot', d:'Zoom, free camera and high-resolution screenshots.' },
+  { i:'🌙', n:'Resource packs',       d:'Dark UI, better leaves, fresh animations — all optional.' },
+];
 
 const perf = [
   { i:'⚡', n:'Sodium',          d:'Complete rendering rewrite. The single biggest FPS gain available.', u:'https://modrinth.com/mod/sodium' },
@@ -16,21 +27,96 @@ const qol = [
   { i:'🍗', n:'AppleSkin',       d:'Shows food saturation and hunger values.', u:'https://modrinth.com/mod/appleskin' },
   { i:'🔎', n:'Jade',            d:'Displays info about whatever you are looking at.', u:'https://modrinth.com/mod/jade' },
   { i:'⚙', n:'Mod Menu',        d:'In-game list and config for all your mods.', u:'https://modrinth.com/mod/modmenu' },
-  { i:'🎒', n:'Inventory Profiles Next', d:'Sorting and auto-refill for your inventory.', u:'https://modrinth.com/mod/inventory-profiles-next' },
+  { i:'🎒', n:'Inventory Sorting', d:'Sorting and auto-refill for your inventory.', u:'https://modrinth.com/mod/inventory-profiles-next' },
 ];
 const visual = [
+  { i:'🌄', n:'Distant Horizons', d:'See the pregenerated world at huge distance. Must be ' + PACK.dhVersion + ' to match the server.', u:'https://modrinth.com/mod/distanthorizons' },
   { i:'🌅', n:'Iris Shaders',    d:'Shader support. Works alongside Sodium.', u:'https://modrinth.com/mod/iris' },
-  { i:'✨', n:'Distant Horizons', d:'Renders terrain far past your view distance as LODs.', u:'https://modrinth.com/mod/distanthorizons' },
   { i:'🎵', n:'Simple Voice Chat', d:'Proximity voice chat. Ask before installing — needs a server tunnel.', u:'https://modrinth.com/mod/simple-voice-chat' },
 ];
 ---
-<Base title="Mods — GibbSux">
+<Base title="Mods — GibbSux" desc="Recommended modpack and client-side mods for the GibbSux server.">
   <section class="wrap">
     <div class="section-head">
       <span class="eyebrow">CLIENT MODS</span>
       <h2>Mods</h2>
       <p class="lead">The server runs performance mods only. You can install whatever
       client-side mods you like — they need nothing on our end.</p>
+    </div>
+
+    <!-- ===== recommended pack ===== -->
+    <div id="modpack" class="addrbox" style="max-width:100%;text-align:left;margin-bottom:16px">
+      <div class="lbl">WE RECOMMEND</div>
+      <h3 style="font-size:22px;margin-bottom:8px">The {PACK.name} Pack v{PACK.version}</h3>
+      <p class="muted" style="font-size:15px;margin-bottom:18px">
+        Our recommended setup for this server: {PACK.modCount} mods and resource packs, already
+        configured, including the exact Distant Horizons build we run. No content mods, so it
+        can't get you kicked. One download instead of picking through the lists below.
+      </p>
+      <p class="small muted" style="margin-bottom:18px">
+        Minecraft {SERVER.mcVersion} · Fabric {SERVER.loaderVersion} · {PACK.size}
+      </p>
+      <a class="btn btn-p" href={PACK.file} download>⬇ Download .mrpack</a>
+      <a class="btn btn-g" href="https://modrinth.com/app" target="_blank" rel="noopener" style="margin-left:8px">Get Modrinth App</a>
+    </div>
+
+    <div class="card-flat accent-amber" style="margin-bottom:34px">
+      <h3>⚠ Please read</h3>
+      <p class="muted small">
+        This is <b>not an official Modrinth modpack</b> and it is not affiliated with, endorsed by
+        or supported by Mojang, Modrinth, or any of the mod authors. It is a collection put
+        together and edited by the GibbSux team for use on this server.<br/><br/>
+        Every mod inside belongs to its own author and is distributed under its own licence — all
+        credit goes to them. Configs and resource pack selections have been changed from their
+        defaults to suit this server.<br/><br/>
+        Use it at your own risk. If something breaks, tell <b>us</b> on Discord — please don't
+        report pack issues to the individual mod authors, since the problem is far more likely to
+        be our configuration than their mod. You're never required to use it: vanilla Fabric works
+        fine, and so does any set of client-side mods you pick yourself.
+      </p>
+    </div>
+
+    <div class="section-head"><h2 style="font-size:24px">What's in the pack</h2></div>
+    <div class="grid g2" style="margin-bottom:26px">
+      {packHighlights.map(h => (
+        <div class="mod">
+          <span class="mod-i">{h.i}</span>
+          <span><b>{h.n}</b><span>{h.d}</span></span>
+        </div>
+      ))}
+    </div>
+
+    <div class="card-flat" style="margin-bottom:44px">
+      <h3>Installing it</h3>
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-b"><h3>Install the Modrinth App</h3>
+        <p>Free, and it handles Fabric and Java for you.
+        <a href="https://modrinth.com/app" target="_blank" rel="noopener">modrinth.com/app</a></p></div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-b"><h3>Open the .mrpack</h3>
+        <p>Double-click it, or in the app choose <b>Add instance → From file</b>.
+        All {PACK.modCount} files download automatically.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-b"><h3>Give it 6GB+ RAM</h3>
+        <p>Instance settings → Memory. Distant Horizons needs the headroom — on the default 2GB
+        you'll stutter badly and blame the server.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <div class="step-b"><h3>Add the server</h3>
+        <p>Multiplayer → Add Server → <code style="color:var(--orange)">{SERVER.address}</code></p></div>
+      </div>
+    </div>
+
+    <!-- ===== rolling your own ===== -->
+    <div class="section-head">
+      <span class="eyebrow">OR PICK YOUR OWN</span>
+      <h2 style="font-size:26px">Building it yourself</h2>
     </div>
 
     <div class="grid g2" style="margin-bottom:44px">
@@ -81,11 +167,10 @@ const visual = [
     </div>
 
     <div class="card-flat accent-amber">
-      <h3>Want a proper modpack?</h3>
+      <h3>Want a content modpack?</h3>
       <p class="muted small">Content mods can be added — but they have to go on the server
-      and on every single player's client at matching versions, and the world may need
-      regenerating. If enough people want a pack, ask on Discord and it can be arranged
-      for a fresh season.</p>
+      and on every player's client at matching versions, and the world may need regenerating.
+      If enough people want a pack, ask on Discord and it can be arranged for a fresh season.</p>
       <div class="btn-row" style="justify-content:flex-start;margin-top:18px">
         <a href={SERVER.discord} class="btn btn-dc" target="_blank" rel="noopener">Suggest a modpack</a>
       </div>

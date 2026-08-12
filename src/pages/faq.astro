@@ -36,6 +36,23 @@ import { SERVER } from '../consts.ts';
       off-site storage. If something goes badly wrong we can roll back.</p>
     </details>
     <details>
+      <summary>Why can I see so far?</summary>
+      <p>The server pregenerates terrain and stores Distant Horizons LOD data for it, then sends
+      that to you when you join. You see the whole pregenerated area without having explored it.
+      You need Distant Horizons <b>3.2.0-b</b> client-side — the <a href="/mods#modpack">modpack</a> has it.</p>
+    </details>
+    <details>
+      <summary>I installed Distant Horizons but see nothing at distance</summary>
+      <p>Almost always a version mismatch. The server runs 3.2.0-b and only talks to clients on the
+      same build. A different version fails silently — no error, just no terrain. Use the
+      <a href="/mods#modpack">modpack</a> to be sure.</p>
+    </details>
+    <details>
+      <summary>Do I have to use the modpack?</summary>
+      <p>No. Vanilla Fabric works, and any client-side mods are fine. The pack is just the fast path,
+      and it guarantees the right Distant Horizons version.</p>
+    </details>
+    <details>
       <summary>Can I use shaders?</summary>
       <p>Yes — Iris plus Sodium. Shaders are entirely client-side, so it's purely a
       question of what your GPU can handle.</p>

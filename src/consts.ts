@@ -1,5 +1,5 @@
 export const SERVER = {
-  name: "_Init0_'s Server",
+  name: "GibbSux",
   address: 'jacobs-analogy.tun.ply.gg',
   discord: 'https://discord.com/users/801135252206125096',
   mcVersion: '1.21.8',

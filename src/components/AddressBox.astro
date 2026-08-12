@@ -1,0 +1,21 @@
+---
+import { SERVER } from '../consts.ts';
+---
+<div class="addrbox">
+  <div class="lbl">SERVER ADDRESS</div>
+  <div class="addr-row">
+    <code id="addr">{SERVER.address}</code>
+    <button class="btn btn-p" id="copybtn">Copy</button>
+  </div>
+</div>
+<script>
+  const btn = document.getElementById('copybtn');
+  btn && btn.addEventListener('click', () => {
+    const t = document.getElementById('addr').textContent.trim();
+    navigator.clipboard.writeText(t).then(() => {
+      const o = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = o; }, 1500);
+    });
+  });
+</script>

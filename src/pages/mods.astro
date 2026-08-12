@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import { SERVER } from '../consts.ts';
+
+const perf = [
+  { i:'⚡', n:'Sodium',          d:'Complete rendering rewrite. The single biggest FPS gain available.', u:'https://modrinth.com/mod/sodium' },
+  { i:'🧊', n:'Lithium',         d:'Optimises game logic without changing behaviour.', u:'https://modrinth.com/mod/lithium' },
+  { i:'🧠', n:'FerriteCore',     d:'Cuts memory usage substantially.', u:'https://modrinth.com/mod/ferrite-core' },
+  { i:'🚀', n:'ImmediatelyFast', d:'Speeds up UI and HUD rendering.', u:'https://modrinth.com/mod/immediatelyfast' },
+  { i:'👁', n:'EntityCulling',   d:'Skips rendering entities you cannot see.', u:'https://modrinth.com/mod/entityculling' },
+  { i:'📦', n:'ModernFix',       d:'Faster startup and lower memory use.', u:'https://modrinth.com/mod/modernfix' },
+];
+const qol = [
+  { i:'🗺', n:"Xaero's Minimap", d:'Minimap with waypoints. Pairs with the World Map.', u:'https://modrinth.com/mod/xaeros-minimap' },
+  { i:'🔍', n:'Zoomify',         d:'Optifine-style zoom on a keybind.', u:'https://modrinth.com/mod/zoomify' },
+  { i:'🍗', n:'AppleSkin',       d:'Shows food saturation and hunger values.', u:'https://modrinth.com/mod/appleskin' },
+  { i:'🔎', n:'Jade',            d:'Displays info about whatever you are looking at.', u:'https://modrinth.com/mod/jade' },
+  { i:'⚙', n:'Mod Menu',        d:'In-game list and config for all your mods.', u:'https://modrinth.com/mod/modmenu' },
+  { i:'🎒', n:'Inventory Profiles Next', d:'Sorting and auto-refill for your inventory.', u:'https://modrinth.com/mod/inventory-profiles-next' },
+];
+const visual = [
+  { i:'🌅', n:'Iris Shaders',    d:'Shader support. Works alongside Sodium.', u:'https://modrinth.com/mod/iris' },
+  { i:'✨', n:'Distant Horizons', d:'Renders terrain far past your view distance as LODs.', u:'https://modrinth.com/mod/distanthorizons' },
+  { i:'🎵', n:'Simple Voice Chat', d:'Proximity voice chat. Ask before installing — needs a server tunnel.', u:'https://modrinth.com/mod/simple-voice-chat' },
+];
+---
+<Base title="Mods — INIT0">
+  <section class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">CLIENT MODS</span>
+      <h2>Mods</h2>
+      <p class="lead">The server runs performance mods only. You can install whatever
+      client-side mods you like — they need nothing on our end.</p>
+    </div>
+
+    <div class="grid g2" style="margin-bottom:44px">
+      <div class="card accent-green">
+        <h3>✅ Client-side mods — always fine</h3>
+        <p>Rendering, UI, sound, minimaps, shaders, zoom. These change only what
+        <i>you</i> see, so the server neither knows nor cares.</p>
+      </div>
+      <div class="card accent-red">
+        <h3>❌ Content mods — will kick you</h3>
+        <p>Anything adding blocks, items, entities, dimensions or recipes. Create,
+        Farmer's Delight, Twilight Forest, Alex's Mobs and similar. These must exist on
+        the server too, at identical versions.</p>
+      </div>
+    </div>
+
+    <div class="section-head"><h2 style="font-size:24px">⚡ Performance</h2>
+      <p class="muted small">Install these first. On a mid-range PC they can triple your frame rate.</p></div>
+    <div class="grid g2" style="margin-bottom:44px">
+      {perf.map(m => (
+        <a class="mod" href={m.u} target="_blank" rel="noopener">
+          <span class="mod-i">{m.i}</span>
+          <span><b>{m.n}</b><span>{m.d}</span></span>
+        </a>
+      ))}
+    </div>
+
+    <div class="section-head"><h2 style="font-size:24px">🎯 Quality of life</h2>
+      <p class="muted small">Not required, but most people end up with all of these.</p></div>
+    <div class="grid g2" style="margin-bottom:44px">
+      {qol.map(m => (
+        <a class="mod" href={m.u} target="_blank" rel="noopener">
+          <span class="mod-i">{m.i}</span>
+          <span><b>{m.n}</b><span>{m.d}</span></span>
+        </a>
+      ))}
+    </div>
+
+    <div class="section-head"><h2 style="font-size:24px">🎨 Visual</h2>
+      <p class="muted small">Heavier. Lovely on a strong GPU, painful on a laptop.</p></div>
+    <div class="grid g2" style="margin-bottom:44px">
+      {visual.map(m => (
+        <a class="mod" href={m.u} target="_blank" rel="noopener">
+          <span class="mod-i">{m.i}</span>
+          <span><b>{m.n}</b><span>{m.d}</span></span>
+        </a>
+      ))}
+    </div>
+
+    <div class="card-flat accent-amber">
+      <h3>Want a proper modpack?</h3>
+      <p class="muted small">Content mods can be added — but they have to go on the server
+      and on every single player's client at matching versions, and the world may need
+      regenerating. If enough people want a pack, ask on Discord and it can be arranged
+      for a fresh season.</p>
+      <div class="btn-row" style="justify-content:flex-start;margin-top:18px">
+        <a href={SERVER.discord} class="btn btn-dc" target="_blank" rel="noopener">Suggest a modpack</a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import { SERVER } from '../consts.ts';
+---
+<Base title="Rules — INIT0">
+  <section class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">HOUSE RULES</span>
+      <h2>Rules</h2>
+      <p class="lead">Short list. It comes down to not ruining the game for anyone else.</p>
+    </div>
+
+    <div class="grid g2" style="margin-bottom:34px">
+      <div class="card accent-red">
+        <h3>No griefing</h3>
+        <p>Don't break, burn or steal from other people's builds. Ever. This is the one
+        that gets you removed immediately and without discussion.</p>
+      </div>
+      <div class="card accent-red">
+        <h3>No cheating</h3>
+        <p>X-ray, kill aura, auto-clickers, flight, reach, freecam. If it gives you an
+        advantage the rest of us don't have, it isn't allowed.</p>
+      </div>
+      <div class="card accent-red">
+        <h3>No lag machines</h3>
+        <p>Giant mob farms, endless dispenser clocks and chunk-loading contraptions hurt
+        everyone. This server runs on a Raspberry Pi — be reasonable.</p>
+      </div>
+      <div class="card accent-green">
+        <h3>Build with space</h3>
+        <p>The world is unlimited. Don't build right on top of someone unless they've
+        said it's fine.</p>
+      </div>
+      <div class="card accent-green">
+        <h3>Be decent</h3>
+        <p>No slurs, no harassment, no drama. Everyone here got in because someone
+        vouched for them.</p>
+      </div>
+      <div class="card accent-green">
+        <h3>Ask before big changes</h3>
+        <p>Terraforming a mountain, draining an ocean, redirecting a river near others —
+        just mention it first.</p>
+      </div>
+    </div>
+
+    <div class="card-flat accent-amber">
+      <h3>What happens if you break them</h3>
+      <p class="muted small">There's no warning system or ticket process. Griefing gets you banned
+      and the damage restored from the nightly backup, which costs everyone else their progress
+      since the last save. That's why the rule is absolute rather than negotiable.</p>
+    </div>
+
+    <div class="section-head" style="margin-top:60px"><h2 style="font-size:24px">Server settings</h2></div>
+    <div class="card-flat">
+      <table>
+        <tr><th>SETTING</th><th style="text-align:right">VALUE</th></tr>
+        <tr><td>Version</td><td style="text-align:right"><span class="val">{SERVER.loader} {SERVER.mcVersion}</span></td></tr>
+        <tr><td>Gamemode</td><td style="text-align:right"><span class="val">{SERVER.gamemode}</span></td></tr>
+        <tr><td>View distance</td><td style="text-align:right"><span class="val">{SERVER.viewDistance}</span></td></tr>
+        <tr><td>Max players</td><td style="text-align:right"><span class="val">{SERVER.maxPlayers}</span></td></tr>
+        <tr><td>Whitelist</td><td style="text-align:right"><span class="val">on</span></td></tr>
+        <tr><td>Online mode</td><td style="text-align:right"><span class="val">on</span></td></tr>
+        <tr><td>World border</td><td style="text-align:right"><span class="val">none</span></td></tr>
+        <tr><td>Backups</td><td style="text-align:right"><span class="val">nightly 04:00</span></td></tr>
+      </table>
+    </div>
+  </section>
+</Base>

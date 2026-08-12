@@ -1,0 +1,18 @@
+---
+import { SERVER } from '../consts.ts';
+---
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a href="/" class="logo"><span class="logo-mark"></span> INIT0</a>
+      <p class="foot-note">Fabric {SERVER.mcVersion} · Survival · Whitelist only<br/>Self-hosted on a Raspberry Pi.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/join">How to Join</a>
+      <a href="/mods">Mods</a>
+      <a href="/rules">Rules</a>
+      <a href="/faq">FAQ</a>
+      <a href={SERVER.discord} target="_blank" rel="noopener">Discord</a>
+    </div>
+  </div>
+</footer>

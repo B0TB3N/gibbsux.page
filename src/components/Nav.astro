@@ -1,0 +1,28 @@
+---
+const { path = '' } = Astro.props;
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/join', label: 'How to Join' },
+  { href: '/mods', label: 'Mods' },
+  { href: '/rules', label: 'Rules' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/faq', label: 'FAQ' },
+];
+---
+<nav class="nav">
+  <div class="nav-in">
+    <a href="/" class="logo"><span class="logo-mark"></span> INIT0</a>
+    <button class="burger" id="burger" aria-label="Menu">☰</button>
+    <div class="nav-links" id="navlinks">
+      {links.map(l => (
+        <a href={l.href} class={path === l.href ? 'on' : ''}>{l.label}</a>
+      ))}
+      <a href="/join" class="nav-cta">JOIN NOW</a>
+    </div>
+  </div>
+</nav>
+<script>
+  const b = document.getElementById('burger');
+  const n = document.getElementById('navlinks');
+  b && b.addEventListener('click', () => n.classList.toggle('open'));
+</script>

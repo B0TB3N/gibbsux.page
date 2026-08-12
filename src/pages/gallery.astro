@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import { SERVER } from '../consts.ts';
+const shots = [
+  { t:'Spawn area',      s:'Drop your screenshots into /public/shots' },
+  { t:'First base',      s:'Then swap the placeholders for <img> tags' },
+  { t:'Nether hub',      s:'16:10 images look best' },
+  { t:'Community build', s:'Anything from the server' },
+  { t:'That one farm',   s:'Send them on Discord to get added' },
+  { t:'Sunset',          s:'Shaders make these look great' },
+];
+---
+<Base title="Gallery — INIT0">
+  <section class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">SCREENSHOTS</span>
+      <h2>Gallery</h2>
+      <p class="lead">Builds from the server. Send yours on Discord and it goes up here.</p>
+    </div>
+
+    <div class="shots">
+      {shots.map(s => (
+        <div class="shot">
+          <div class="ph"><span class="em">🖼</span><b>{s.t}</b><br/>{s.s}</div>
+        </div>
+      ))}
+    </div>
+
+    <div class="card-flat" style="margin-top:34px">
+      <h3>Add your screenshot</h3>
+      <p class="muted small">Press <b>F2</b> in game to take a screenshot — it saves to
+      <code style="color:var(--cyan)">.minecraft/screenshots</code>. Send it on Discord
+      and it'll be added here.</p>
+      <div class="btn-row" style="justify-content:flex-start;margin-top:18px">
+        <a href={SERVER.discord} class="btn btn-dc" target="_blank" rel="noopener">Send a screenshot</a>
+      </div>
+    </div>
+  </section>
+</Base>

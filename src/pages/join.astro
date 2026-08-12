@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import AddressBox from '../components/AddressBox.astro';
+import { SERVER } from '../consts.ts';
+---
+<Base title="How to Join — INIT0">
+  <section class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">GETTING IN</span>
+      <h2>How to Join</h2>
+      <p class="lead">Five minutes from nothing to spawning in. You need Minecraft Java — Bedrock does not work.</p>
+    </div>
+
+    <div class="card-flat accent-amber" style="margin-bottom:34px">
+      <h3>Step zero — get whitelisted</h3>
+      <p class="muted small">The server only accepts invited players. Send your <b>exact</b> Minecraft
+      username on Discord before you do anything else. Capital letters and underscores matter.</p>
+      <div class="btn-row" style="justify-content:flex-start;margin-top:18px">
+        <a href={SERVER.discord} class="btn btn-dc" target="_blank" rel="noopener">Message on Discord</a>
+      </div>
+    </div>
+
+    <div class="section-head"><h2 style="font-size:24px">What you need</h2></div>
+    <div class="card-flat" style="margin-bottom:34px">
+      <table>
+        <tr><th>REQUIREMENT</th><th style="text-align:right">VERSION</th></tr>
+        <tr><td>Minecraft Java Edition<br/><span class="small muted">Bedrock / console / phone will not work</span></td><td style="text-align:right"><span class="val">{SERVER.mcVersion}</span></td></tr>
+        <tr><td>Fabric Loader<br/><span class="small muted">The mod loader</span></td><td style="text-align:right"><span class="val">{SERVER.loaderVersion}+</span></td></tr>
+        <tr><td>Paid Minecraft account<br/><span class="small muted">Cracked clients are rejected</span></td><td style="text-align:right"><span class="val">required</span></td></tr>
+      </table>
+    </div>
+
+    <div class="section-head"><h2 style="font-size:24px">Setup</h2></div>
+    <div class="card-flat" style="margin-bottom:34px">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-b">
+          <h3>Install a launcher</h3>
+          <p>Get the <a href="https://modrinth.com/app" target="_blank" rel="noopener">Modrinth App</a>
+          or <a href="https://prismlauncher.org" target="_blank" rel="noopener">Prism Launcher</a>.
+          Both are free and handle Fabric for you. The normal Minecraft launcher works too,
+          but you'd install Fabric manually.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-b">
+          <h3>Create an instance</h3>
+          <p>New instance → Minecraft <b>{SERVER.mcVersion}</b> → loader <b>Fabric</b>.
+          Give it a name you'll recognise later.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-b">
+          <h3>Add mods (optional)</h3>
+          <p>Install client-side mods from inside the launcher. Sodium alone will roughly
+          double your FPS. See the <a href="/mods">Mods page</a> for what's safe.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <div class="step-b">
+          <h3>Add the server</h3>
+          <p>Launch the instance → Multiplayer → Add Server → paste the address below → Done.</p>
+        </div>
+      </div>
+    </div>
+
+    <AddressBox />
+
+    <div class="section-head" style="margin-top:60px"><h2 style="font-size:24px">If it doesn't work</h2></div>
+    <details>
+      <summary>"You are not white-listed on this server"</summary>
+      <p>You haven't been added yet, or your username was typed wrong.
+      Send it again on Discord — copy it directly from your launcher to avoid typos.</p>
+    </details>
+    <details>
+      <summary>"Outdated client" or "Outdated server"</summary>
+      <p>Your instance isn't on {SERVER.mcVersion}. Check the version in your launcher profile.
+      This is the most common problem by far.</p>
+    </details>
+    <details>
+      <summary>"Failed to connect" / "Connection refused"</summary>
+      <p>The server may be restarting, or the host machine is off. Check the live status
+      on the <a href="/">home page</a> and try again in a few minutes.</p>
+    </details>
+    <details>
+      <summary>Kicked immediately after joining</summary>
+      <p>You almost certainly have a content mod installed that the server doesn't have.
+      Remove any mod that adds blocks, items or entities — see the <a href="/mods">Mods page</a>.</p>
+    </details>
+  </section>
+</Base>

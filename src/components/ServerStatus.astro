@@ -1,0 +1,54 @@
+---
+import { SERVER } from '../consts.ts';
+---
+<div class="status-card" data-addr={SERVER.address}>
+  <div class="status-top">
+    <span class="dot" id="sdot"></span>
+    <span class="status-txt" id="stxt">CHECKING…</span>
+  </div>
+  <div class="status-stats">
+    <div class="stat"><div class="k">PLAYERS</div><div class="v" id="sply">—</div></div>
+    <div class="stat"><div class="k">VERSION</div><div class="v" id="sver" style="font-size:17px">—</div></div>
+  </div>
+  <div class="plist" id="splist"></div>
+</div>
+<script>
+  (async () => {
+    const box  = document.querySelector('.status-card');
+    const dot  = document.getElementById('sdot');
+    const txt  = document.getElementById('stxt');
+    const ply  = document.getElementById('sply');
+    const ver  = document.getElementById('sver');
+    const list = document.getElementById('splist');
+    if (!box) return;
+
+    try {
+      const r = await fetch('https://api.mcsrvstat.us/3/' + box.dataset.addr);
+      const d = await r.json();
+
+      if (d.online) {
+        dot.className = 'dot on';
+        txt.textContent = 'ONLINE';
+        txt.style.color = 'var(--green)';
+        ply.textContent = (d.players?.online ?? 0) + ' / ' + (d.players?.max ?? '?');
+        ver.textContent = d.version || '—';
+        const names = d.players?.list?.map(p => p.name) || [];
+        list.innerHTML = names.length
+          ? names.map(n => '<span class="pchip">' + n + '</span>').join('')
+          : '<span class="small muted">Nobody online right now.</span>';
+      } else {
+        dot.className = 'dot off';
+        txt.textContent = 'OFFLINE';
+        txt.style.color = 'var(--red)';
+        ply.textContent = '—';
+        ver.textContent = '—';
+        list.innerHTML = '<span class="small muted">Server is not reachable. It may be restarting.</span>';
+      }
+    } catch (e) {
+      dot.className = 'dot off';
+      txt.textContent = 'UNKNOWN';
+      ply.textContent = '—';
+      list.innerHTML = '<span class="small muted">Could not reach the status service.</span>';
+    }
+  })();
+</script>

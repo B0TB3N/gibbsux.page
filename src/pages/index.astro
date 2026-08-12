@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import AddressBox from '../components/AddressBox.astro';
+import ServerStatus from '../components/ServerStatus.astro';
+import { SERVER } from '../consts.ts';
+---
+<Base title="_Init0_'s Minecraft Server">
+
+  <div class="wrap hero">
+    <h1 class="pixel">PLAY ON <span class="grad">INIT0</span></h1>
+    <p class="lead">A small, self-hosted Fabric survival server. No pay-to-win, no resets,
+      no strangers — just friends building on an unlimited world.</p>
+
+    <div class="hero-badges">
+      <span class="chip">⛏ <b>Fabric {SERVER.mcVersion}</b></span>
+      <span class="chip">🌍 <b>Unlimited world</b></span>
+      <span class="chip">🔒 <b>Whitelist only</b></span>
+      <span class="chip">💾 <b>Nightly backups</b></span>
+    </div>
+
+    <AddressBox />
+
+    <div class="btn-row">
+      <a href="/join" class="btn btn-p">How to Join →</a>
+      <a href={SERVER.discord} class="btn btn-dc" target="_blank" rel="noopener">Ask for Access</a>
+    </div>
+  </div>
+
+  <section class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">LIVE STATUS</span>
+      <h2>Is it up right now?</h2>
+    </div>
+    <ServerStatus />
+  </section>
+
+  <section class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">WHY THIS SERVER</span>
+      <h2>Small by design</h2>
+      <p class="lead">Public servers are full of strangers, lag and shops. This one is the opposite.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <span class="ico">🔒</span>
+        <h3>Whitelist only</h3>
+        <p>Everyone here was invited. No randoms, no griefers walking in off a server list.</p>
+      </div>
+      <div class="card">
+        <span class="ico">⚡</span>
+        <h3>Actually fast</h3>
+        <p>Performance mods and tuned settings. Chunks load quickly and the tick rate holds.</p>
+      </div>
+      <div class="card">
+        <span class="ico">🌍</span>
+        <h3>No world border</h3>
+        <p>Walk as far as you like. The world generates forever in every direction.</p>
+      </div>
+      <div class="card">
+        <span class="ico">💾</span>
+        <h3>Backed up nightly</h3>
+        <p>Automatic backups every night, stored off-site. Your builds survive accidents.</p>
+      </div>
+      <div class="card">
+        <span class="ico">🎨</span>
+        <h3>Your mods, your choice</h3>
+        <p>Shaders, minimaps, zoom, FPS mods — install whatever you want client-side.</p>
+      </div>
+      <div class="card">
+        <span class="ico">🍓</span>
+        <h3>Self-hosted</h3>
+        <p>Runs on a Raspberry Pi in a bedroom, not a datacenter. No ads, no ranks, no shop.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">GET STARTED</span>
+      <h2>Three steps</h2>
+    </div>
+    <div class="card-flat">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-b">
+          <h3>Ask to be whitelisted</h3>
+          <p>Send your exact Minecraft username on Discord. Names are case-sensitive.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-b">
+          <h3>Install Fabric {SERVER.mcVersion}</h3>
+          <p>Use the Modrinth App or Prism Launcher — takes about two minutes.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-b">
+          <h3>Add the server and play</h3>
+          <p>Paste the address into Multiplayer → Add Server. That's it.</p>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row" style="justify-content:flex-start;margin-top:22px">
+      <a href="/join" class="btn btn-g">Full guide →</a>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="band">
+      <span class="eyebrow">READY?</span>
+      <h2 style="margin-bottom:14px">Come build something</h2>
+      <p class="lead" style="margin:0 auto 26px">Send your username on Discord and you'll be added in minutes.</p>
+      <div class="btn-row" style="margin-top:0">
+        <a href={SERVER.discord} class="btn btn-dc" target="_blank" rel="noopener">Ask for Access</a>
+        <a href="/rules" class="btn btn-g">Read the Rules</a>
+      </div>
+    </div>
+  </section>
+
+</Base>

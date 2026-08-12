@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import { SERVER } from '../consts.ts';
+---
+<Base title="FAQ — INIT0">
+  <section class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">QUESTIONS</span>
+      <h2>FAQ</h2>
+      <p class="lead">If your question isn't here, ask on Discord.</p>
+    </div>
+
+    <details open>
+      <summary>How do I get whitelisted?</summary>
+      <p>Send your exact Minecraft username on <a href={SERVER.discord} target="_blank" rel="noopener">Discord</a>.
+      Names are case-sensitive, so copy it from your launcher rather than typing it.</p>
+    </details>
+    <details>
+      <summary>Can I play on Bedrock, console or my phone?</summary>
+      <p>No. This is Java Edition only. Bedrock uses a completely different network
+      protocol and cannot connect.</p>
+    </details>
+    <details>
+      <summary>Do I need a paid Minecraft account?</summary>
+      <p>Yes. The server verifies every login with Mojang, so cracked clients are
+      rejected. This is also what stops people impersonating you.</p>
+    </details>
+    <details>
+      <summary>Is the server on 24/7?</summary>
+      <p>Mostly. It runs on a Raspberry Pi at home, so it goes down occasionally for
+      updates, power cuts or internet problems. Check the live status on the home page.</p>
+    </details>
+    <details>
+      <summary>Will my builds get deleted?</summary>
+      <p>No. There are no scheduled resets, and the world is backed up every night to
+      off-site storage. If something goes badly wrong we can roll back.</p>
+    </details>
+    <details>
+      <summary>Can I use shaders?</summary>
+      <p>Yes — Iris plus Sodium. Shaders are entirely client-side, so it's purely a
+      question of what your GPU can handle.</p>
+    </details>
+    <details>
+      <summary>Why do I get kicked as soon as I join?</summary>
+      <p>You have a mod installed that adds content the server doesn't have. Make a clean
+      Fabric instance with only client-side mods. See the <a href="/mods">Mods page</a>.</p>
+    </details>
+    <details>
+      <summary>Why is my ping high?</summary>
+      <p>The server is reached through a free tunnel that routes players based on their
+      ISP, and it occasionally picks a distant datacenter. Usually it's fine within Europe.</p>
+    </details>
+    <details>
+      <summary>Can I invite a friend?</summary>
+      <p>Ask first. It's a small server and everyone here was vouched for by someone.
+      Usually the answer is yes.</p>
+    </details>
+    <details>
+      <summary>Can we add a modpack?</summary>
+      <p>Possible, but it means every player installs the same pack at the same versions,
+      and probably a fresh world. If several people want it, bring it up on Discord.</p>
+    </details>
+    <details>
+      <summary>What hardware does it run on?</summary>
+      <p>A Raspberry Pi 5 with 16GB of RAM, running Fabric with performance mods
+      (Lithium, C2ME, FerriteCore, Krypton). Startup takes about five seconds.</p>
+    </details>
+  </section>
+</Base>

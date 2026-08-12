@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>_Init0_'s Minecraft Server</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2129; --line:#2d333b;
+    --text:#e6edf3; --dim:#8b949e; --green:#3fb950; --red:#f85149;
+    --yellow:#d29922; --accent:#58a6ff; --grass:#5d9c3f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--text);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    padding:0 20px 80px;
+  }
+  .wrap{max-width:860px;margin:0 auto}
+
+  header{
+    text-align:center;padding:64px 0 40px;
+    border-bottom:1px solid var(--line);margin-bottom:40px;
+  }
+  h1{font-size:clamp(28px,5vw,42px);letter-spacing:-.5px;margin-bottom:8px}
+  .sub{color:var(--dim);font-size:15px}
+
+  .addr{
+    margin:32px auto 0;max-width:520px;background:var(--panel);
+    border:1px solid var(--line);border-radius:12px;padding:20px;
+  }
+  .addr-label{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--dim);margin-bottom:10px}
+  .addr-row{display:flex;gap:10px;align-items:center}
+  .addr code{
+    flex:1;background:var(--bg);border:1px solid var(--line);border-radius:8px;
+    padding:12px 14px;font-family:ui-monospace,"SF Mono",Menlo,monospace;
+    font-size:15px;color:var(--accent);overflow-x:auto;white-space:nowrap;
+  }
+  button{
+    background:var(--grass);color:#fff;border:0;border-radius:8px;
+    padding:12px 18px;font-size:14px;font-weight:600;cursor:pointer;
+    font-family:inherit;transition:opacity .15s;
+  }
+  button:hover{opacity:.85}
+
+  h2{
+    font-size:13px;text-transform:uppercase;letter-spacing:1.4px;
+    color:var(--dim);margin:44px 0 16px;font-weight:600;
+  }
+  .card{
+    background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;padding:22px;margin-bottom:14px;
+  }
+  .req{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .req:last-child{border-bottom:0}
+  .req-name{font-weight:600}
+  .req-note{font-size:13px;color:var(--dim);margin-top:2px}
+  .val{
+    font-family:ui-monospace,Menlo,monospace;font-size:14px;
+    background:var(--panel2);border:1px solid var(--line);
+    padding:4px 10px;border-radius:6px;white-space:nowrap;color:var(--accent);
+  }
+
+  .warn{border-left:3px solid var(--red)}
+  .warn h3{color:var(--red);font-size:15px;margin-bottom:8px}
+  .ok{border-left:3px solid var(--green)}
+  .ok h3{color:var(--green);font-size:15px;margin-bottom:8px}
+
+  .modgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:14px}
+  .mod{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+  .mod b{display:block;font-size:14px;margin-bottom:2px}
+  .mod span{font-size:12.5px;color:var(--dim)}
+
+  ol{padding-left:20px} ol li{margin:8px 0}
+  ul{padding-left:20px} ul li{margin:6px 0}
+
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:8px}
+  summary{cursor:pointer;font-weight:600;font-size:15px}
+  details p{color:var(--dim);font-size:14.5px;margin-top:10px}
+
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  td{padding:9px 0;border-bottom:1px solid var(--line)}
+  td:last-child{text-align:right;color:var(--dim);font-family:ui-monospace,Menlo,monospace}
+  tr:last-child td{border-bottom:0}
+
+  footer{text-align:center;color:var(--dim);font-size:13px;margin-top:56px;padding-top:24px;border-bottom:0;border-top:1px solid var(--line)}
+  a{color:var(--accent)}
+  .pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:3px 12px;font-size:12.5px;color:var(--dim);margin:0 4px}
+
+  .dc{
+    display:inline-flex;align-items:center;gap:9px;background:#5865F2;color:#fff;
+    text-decoration:none;padding:11px 18px;border-radius:8px;
+    font-size:14.5px;font-weight:600;transition:opacity .15s;
+  }
+  .dc:hover{opacity:.87}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>⛏ _Init0_'s Server</h1>
+    <p class="sub">Fabric 1.21.8 · Survival · Whitelist only</p>
+    <span class="pill">Hosted on a Raspberry Pi 5</span>
+    <span class="pill">Nightly backups</span>
+
+    <div class="addr">
+      <div class="addr-label">Server address</div>
+      <div class="addr-row">
+        <code id="ip">jacobs-analogy.tun.ply.gg</code>
+        <button onclick="copyIp()">Copy</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="card warn">
+    <h3>Whitelist only</h3>
+    <p style="font-size:14.5px;color:var(--dim);margin-bottom:16px">
+      Send me your <b style="color:var(--text)">exact Minecraft username</b> on Discord
+      before you try to join. Names are case-sensitive.
+    </p>
+    <a class="dc" href="https://discord.com/users/801135252206125096" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 127 96" fill="currentColor" aria-hidden="true">
+        <path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15ZM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69Zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69Z"/>
+      </svg>
+      Ask for access on Discord
+    </a>
+  </div>
+
+  <h2>What you need</h2>
+  <div class="card">
+    <div class="req">
+      <div><div class="req-name">Minecraft Java Edition</div>
+      <div class="req-note">Bedrock (phone, console, Win10) does not work</div></div>
+      <span class="val">1.21.8</span>
+    </div>
+    <div class="req">
+      <div><div class="req-name">Fabric Loader</div>
+      <div class="req-note">fabricmc.net/use/installer</div></div>
+      <span class="val">0.19.3+</span>
+    </div>
+    <div class="req">
+      <div><div class="req-name">Paid Minecraft account</div>
+      <div class="req-note">Cracked clients are rejected</div></div>
+      <span class="val">required</span>
+    </div>
+  </div>
+
+  <h2>Setup in 4 steps</h2>
+  <div class="card">
+    <ol>
+      <li>Install the <a href="https://modrinth.com/app" target="_blank" rel="noopener">Modrinth App</a> (or Prism Launcher)</li>
+      <li>New instance → Minecraft <b>1.21.8</b> → loader <b>Fabric</b></li>
+      <li>Add any client mods you want from inside the app</li>
+      <li>Launch → Multiplayer → Add Server → paste the address above</li>
+    </ol>
+  </div>
+
+  <h2>Recommended mods — optional</h2>
+  <div class="card ok">
+    <h3>Client-side only — safe, need nothing on the server</h3>
+    <div class="modgrid">
+      <div class="mod"><b>Sodium</b><span>Rendering rewrite, big FPS gain</span></div>
+      <div class="mod"><b>Lithium</b><span>General optimisation</span></div>
+      <div class="mod"><b>FerriteCore</b><span>Lower memory use</span></div>
+      <div class="mod"><b>ImmediatelyFast</b><span>Faster UI rendering</span></div>
+      <div class="mod"><b>EntityCulling</b><span>Skips hidden entities</span></div>
+      <div class="mod"><b>Iris Shaders</b><span>Shaders, works with Sodium</span></div>
+      <div class="mod"><b>Mod Menu</b><span>In-game mod list</span></div>
+      <div class="mod"><b>Xaero's Minimap</b><span>Minimap + world map</span></div>
+      <div class="mod"><b>Zoomify</b><span>Optifine-style zoom</span></div>
+      <div class="mod"><b>AppleSkin</b><span>Food and saturation info</span></div>
+      <div class="mod"><b>Jade</b><span>Shows the block you look at</span></div>
+      <div class="mod"><b>Fabric API</b><span>Required by most mods</span></div>
+    </div>
+  </div>
+
+  <div class="card warn">
+    <h3>Do not install — you will be kicked</h3>
+    <p style="font-size:14.5px;color:var(--dim)">
+      Any mod that <b style="color:var(--text)">adds content</b> — blocks, items, entities,
+      dimensions, recipes. Create, Farmer's Delight, Twilight Forest, Alex's Mobs,
+      Biomes O' Plenty and similar.<br><br>
+      The server runs performance mods only. Content mods must exist on the server
+      <i>and</i> every client at identical versions, or the connection fails.
+      Want a modpack? Ask on Discord — it needs a server change.<br><br>
+      Cheats are also out: X-ray, kill aura, auto-clicker, flight, reach.
+    </p>
+  </div>
+
+  <h2>Server settings</h2>
+  <div class="card">
+    <table>
+      <tr><td>Version</td><td>Fabric 1.21.8</td></tr>
+      <tr><td>Gamemode</td><td>Survival</td></tr>
+      <tr><td>View distance</td><td>10 chunks</td></tr>
+      <tr><td>Max players</td><td>20</td></tr>
+      <tr><td>Whitelist</td><td>on</td></tr>
+      <tr><td>Online mode</td><td>on</td></tr>
+      <tr><td>World border</td><td>none — unlimited</td></tr>
+      <tr><td>Backups</td><td>nightly 04:00</td></tr>
+    </table>
+  </div>
+
+  <h2>Problems?</h2>
+  <details><summary>"You are not white-listed on this server"</summary>
+    <p>You haven't been added yet. Send your exact username on
+    <a href="https://discord.com/users/801135252206125096" target="_blank" rel="noopener">Discord</a>.</p></details>
+  <details><summary>"Failed to connect" / "Connection refused"</summary>
+    <p>The server may be restarting or the host is offline. Wait a minute and try again.</p></details>
+  <details><summary>"Outdated client" or "Outdated server"</summary>
+    <p>Your Minecraft isn't 1.21.8. Check the version in your launcher profile.</p></details>
+  <details><summary>Kicked immediately, or "missing mods"</summary>
+    <p>You have a content mod installed. Remove it, or make a clean Fabric instance
+    with only the client-side mods listed above.</p></details>
+  <details><summary>High ping / lag</summary>
+    <p>The free tunnel routes by your ISP and occasionally picks a distant datacenter.
+    Check playit.gg's ping tool to see where you land.</p></details>
+
+  <footer>
+    Running on a Raspberry Pi 5 · Fabric 1.21.8<br>
+    Be decent to each other. Grief and you get banned.
+  </footer>
+
+</div>
+
+<script>
+function copyIp(){
+  var t = document.getElementById('ip').textContent.trim();
+  navigator.clipboard.writeText(t).then(function(){
+    var b = document.querySelector('button');
+    var o = b.textContent; b.textContent = 'Copied'; b.style.background = '#3fb950';
+    setTimeout(function(){ b.textContent = o; b.style.background = ''; }, 1400);
+  });
+}
+</script>
+</body>
+</html>

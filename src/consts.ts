@@ -1,6 +1,6 @@
 export const SERVER = {
   name: 'GibbSux',
-  address: 'jacobs-analogy.tun.ply.gg',
+  address: 'gibbsux.net',
   discord: 'https://discord.com/users/801135252206125096',
   mcVersion: '1.21.8',
   loader: 'Fabric',

@@ -2,6 +2,128 @@
 import Base from '../layouts/Base.astro';
 import { SERVER, PACK } from '../consts.ts';
 
+
+const packCategories = [
+  {
+    id: 'performance',
+    icon: '\u26A1',
+    name: 'Performance',
+    blurb: 'The reason the pack exists. On most machines these together are worth several times your vanilla frame rate.',
+    mods: [
+      ['Sodium', 'Complete rendering engine rewrite \u2014 the single biggest FPS gain.'],
+      ['Sodium Extra', 'Extra toggles for Sodium: particles, fog, weather, animations.'],
+      ["Reese's Sodium Options", 'A far more usable video settings screen for Sodium.'],
+      ['Lithium', 'Optimises game logic and tick performance without changing behaviour.'],
+      ['FerriteCore', 'Cuts memory usage substantially, especially with big worlds.'],
+      ['ImmediatelyFast', 'Speeds up HUD, GUI and text rendering.'],
+      ['EntityCulling', "Skips rendering entities you can't actually see."],
+      ['MoreCulling', 'Culls hidden block faces \u2014 helps a lot in built-up areas.'],
+      ['Dynamic FPS', 'Drops frame rate when the window is unfocused. Saves battery and heat.'],
+      ['Debugify', 'Fixes a long list of vanilla bugs Mojang has left open.'],
+    ],
+  },
+  {
+    id: 'visual',
+    icon: '\u{1F3A8}',
+    name: 'Visuals & Shaders',
+    blurb: 'Everything that changes how the world looks. All optional \u2014 turn off what your GPU dislikes.',
+    mods: [
+      ['Iris Shaders', 'Shader support, works alongside Sodium. BSL, Complementary and Solas are included.'],
+      ['Distant Horizons', 'Renders terrain far past your view distance. This is what shows the pregenerated world.'],
+      ['LambDynamicLights', 'Held torches and glowing items actually light up the world.'],
+      ['Continuity', 'Connected textures \u2014 glass and bookshelves stop looking like grids.'],
+      ['Entity Model Features', 'Support for custom entity models from resource packs.'],
+      ['Entity Texture Features', 'Custom and random entity textures. Powers Fresh Animations.'],
+      ['Animatica', 'Animated textures from OptiFine-format resource packs.'],
+      ['OptiGUI', 'Lets resource packs restyle GUIs.'],
+      ['BetterGrassify', 'OptiFine-style better grass on block sides.'],
+      ['Skyboxify', 'Custom skyboxes from resource packs.'],
+      ['Puzzle', 'Resource pack extras \u2014 panoramas, shader toggles, and more.'],
+      ['Capes', 'Shows capes from OptiFine, LabyMod and similar.'],
+      ['Model Gap Fix', 'Removes the hairline gaps in item and block models.'],
+    ],
+  },
+  {
+    id: 'hud',
+    icon: '\u{1F4CA}',
+    name: 'HUD & Interface',
+    blurb: 'Information on screen that vanilla leaves out.',
+    mods: [
+      ['Jade', "Shows what block or mob you're looking at, and its state."],
+      ['AppleSkin', 'Food saturation and hunger values on the hunger bar.'],
+      ['Armor HUD', 'Armour durability at a glance.'],
+      ['Better Mount HUD', 'Proper health and jump bars when riding.'],
+      ['Roughly Enough Items', 'Recipe and usage lookup for every item.'],
+      ['Inventory Sorting', 'Sort chests and inventories with a click.'],
+      ['Paginated Advancements', 'Makes the advancement screen usable.'],
+      ['More Chat History', 'Keeps far more chat scrollback than vanilla.'],
+      ['Mod Menu', 'In-game list and config screens for every mod.'],
+      ["Completionist's Index", 'Tracks what you have and have not collected.'],
+      ['Remove Reloading Screen', 'Stops the world freezing on resource pack reloads.'],
+      ['Language Reload', 'Faster language switching and reloads.'],
+      ['Main Menu Credits', 'Small main menu tweak.'],
+    ],
+  },
+  {
+    id: 'utility',
+    icon: '\u{1F9F0}',
+    name: 'Utility & Quality of Life',
+    blurb: 'Tools you end up using constantly without thinking about them.',
+    mods: [
+      ["Xaero's Minimap", 'Minimap with waypoints and death markers.'],
+      ["Xaero's World Map", 'Full explorable world map, pairs with the minimap.'],
+      ['Zoomify', 'Configurable zoom on a keybind.'],
+      ['Freecam', 'Detach the camera to look around. Client-side only.'],
+      ['Fabrishot', 'Screenshots far above your screen resolution.'],
+      ['Client Tweaks', 'A pile of small annoyances, individually toggleable.'],
+      ['Client Commands', 'Client-side commands that never touch the server.'],
+      ['Controlify', 'Full controller support.'],
+      ['FastQuit', 'Return to the menu without waiting for the save.'],
+      ['AFK Cinematic', 'Slow cinematic camera while you are AFK.'],
+      ['e4mc', 'Share a singleplayer world with friends in one click.'],
+      ['No Chat Reports', 'Removes chat reporting and message signing.'],
+      ['Crash Assistant', 'Explains crashes in plain language.'],
+      ['MixinTrace', 'Adds mod names to crash reports so problems are traceable.'],
+      ['YOSBR', 'Ships sensible default settings without overwriting yours.'],
+    ],
+  },
+  {
+    id: 'packs',
+    icon: '\u{1F5BC}',
+    name: 'Resource & Shader Packs',
+    blurb: '17 resource packs and 3 shader packs, all included and switchable in-game.',
+    mods: [
+      ['Fresh Animations', 'Reworked mob animations \u2014 the big visual one.'],
+      ['Better Leaves', 'Fuller, bushier foliage.'],
+      ['Fancy Crops', 'Nicer crop models.'],
+      ['Fast Better Grass', 'Lightweight better-grass look.'],
+      ['New Glowing Ores', 'Ores that stand out underground.'],
+      ['Enchant Icons / Even Better Enchants', 'Readable enchantment display.'],
+      ['Unique Dark, Default Dark Mode, Mandalas GUI', 'Dark interface themes.'],
+      ['Immersive Interfaces, Icon Fresh, Low Shield, Low on Fire', 'Cleaner HUD and menus.'],
+      ['Fresh Animations Extensions', 'Add-ons for Fresh Animations.'],
+      ['BSL / Complementary Unbound / Solas', 'Three shader packs, ready to switch between.'],
+    ],
+  },
+  {
+    id: 'libs',
+    icon: '\u{1F517}',
+    name: 'Libraries',
+    blurb: 'Required by the mods above. Nothing to configure.',
+    mods: [
+      ['Fabric API', ''],
+      ['Fabric Language Kotlin', ''],
+      ['Architectury API', ''],
+      ['Balm', ''],
+      ['Cloth Config', ''],
+      ['YetAnotherConfigLib', ''],
+      ['Forge Config API Port', ''],
+      ['Puzzles Lib', ''],
+      ['CWB', ''],
+    ],
+  },
+];
+
 const packHighlights = [
   { i:'🌄', n:'Distant Horizons ' + PACK.dhVersion, d:'Matches the server exactly. This is what lets you see the pregenerated world at distance.' },
   { i:'⚡', n:'Sodium + Iris',        d:'Rendering rewrite plus shader support. Large FPS gain over vanilla.' },
@@ -76,13 +198,26 @@ const visual = [
       </p>
     </div>
 
-    <div class="section-head"><h2 style="font-size:24px">What's in the pack</h2></div>
-    <div class="grid g2" style="margin-bottom:26px">
-      {packHighlights.map(h => (
-        <div class="mod">
-          <span class="mod-i">{h.i}</span>
-          <span><b>{h.n}</b><span>{h.d}</span></span>
-        </div>
+    <div class="section-head">
+      <h2 style="font-size:24px">What's in the pack</h2>
+      <p class="muted small">{PACK.modCount} files: 60 mods, 17 resource packs, 3 shader packs. Click a category to expand.</p>
+    </div>
+
+    <div style="margin-bottom:26px">
+      {packCategories.map(cat => (
+        <details>
+          <summary>
+            <span>{cat.icon} <b>{cat.name}</b> <span class="muted small">({cat.mods.length})</span></span>
+          </summary>
+          <p class="muted small" style="margin-top:10px">{cat.blurb}</p>
+          <div class="grid g2" style="margin-top:14px">
+            {cat.mods.map(([n, d]) => (
+              <div class="mod" style="padding:11px 14px">
+                <span><b>{n}</b>{d && <span>{d}</span>}</span>
+              </div>
+            ))}
+          </div>
+        </details>
       ))}
     </div>
 

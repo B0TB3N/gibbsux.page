@@ -13,7 +13,7 @@ export const SERVER = {
 export const PACK = {
   name: 'GibbSux',
   version: '1.0.0',
-  file: '/GibbSux-1.0.0.mrpack',
+  file: '/public/GibbSux-1.0.0.mrpack',
   size: '2.4 MB',
   modCount: 79,
   dhVersion: '3.2.0-b',
